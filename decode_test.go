@@ -301,9 +301,9 @@ func tm(t *testing.T, layout, s string) time.Time {
 
 func testEncode(t *testing.T) {
 	type S struct {
-		A string "properties:A"
-		B string "properties:B"
-		C string "properties:c"
+		A string `properties:"A"`
+		B string `properties:"B"`
+		C string `properties:"c"`
 	}
 	P := NewProperties()
 	V := S{"Foo", "bar", "baz"}

@@ -249,10 +249,13 @@ func enc(p *Properties, key string, def *string, opts map[string]string, v refle
 		switch {
 		case isString(t):
 			return s, nil
-//		case isDuration(t):
-//			return fmt.Sprintf("%s", val.Convert(t).(time.Duration)), nil
-//		case isTime(t):
-//			return val.Convert(t).(time.Time).MarshalText(), nil
+		case isDuration(t):
+			v := val.Interface().(time.Duration)
+			return fmt.Sprintf("%s", v), nil
+		case isTime(t):
+			v := val.Interface().(time.Time)
+			s, err2 := v.MarshalText()
+			return fmt.Sprintf("%v", s), err2
 		case isBool(t):
 			return strconv.FormatBool(val.Bool()), nil
 		case isFloat(t):
